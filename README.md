@@ -89,6 +89,41 @@ curl \
 --data-raw '{"query":"mutation {\n    createPost(title: \"New Title\", authorId: \"Author2\", text: \"New Text\") {\n id\n       category\n        author {\n            id\n            name\n        }\n    }\n}"}'
 ```
 
+### Using GraphiQL to test GraphQL queries
+
+GraphiQL is a graphical interactive in-browser GraphQL IDE. It is a great tool for testing and debugging GraphQL queries.
+
+To use GraphiQL, navigate to `http://localhost:8080/graphiql` in your browser.
+```
+query {
+  authoById(id: 1) {
+    id
+    name
+    books {
+      id
+      title
+    }
+  }
+  
+  authos {
+    id
+    name
+    books {
+      id
+      title
+    }
+  }
+}
+
+mutation {
+  addBook(book: {title: "Book 1", publisher: "Manning", authorId: 1}) {
+    id
+    title
+    publisher
+  }
+}
+```
+
 ### Relevant Articles:
 
 - [Getting Started with GraphQL and Spring Boot](https://www.baeldung.com/spring-graphql)
