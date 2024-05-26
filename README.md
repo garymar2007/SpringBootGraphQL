@@ -35,6 +35,42 @@ query {
 In traditional REST API, this either needs 11 requests or a single request that needs 
 to include the author details in the post details.
 
+## GraphQL Schema
+The GraphQL server exposes a schema describing the API. This schema consists of type definitions. Each type has one 
+or more fields, each taking zero or more arguments and returning a specific type.
+
+An example GraphQL Schema for a blog may contain the following definitions describing a Post, the Author of the post, 
+and a root query to get the most recent posts on the blog:
+    
+    ```schema
+    type Post {
+        id: ID!
+        title: String!
+        text: String!
+        category: String!
+        author: Author!
+    }
+    
+    type Author {
+        id: ID!
+        name: String!
+        thumbnail: String
+        posts: [Post]!
+    }
+
+    # The Root Query for the application
+    type Query {
+        recentPosts(count: Int, offset: Int): [Post]!
+    }
+
+    # The Root Mutation for the application
+    type Mutation {
+        createPost(title: String!, text: String!, category: String, authorId: String!) : Post!
+    }
+    '''
+    
+    NB: ! means non-nullable type.
+
 ### GraphQL sample queries
 
 Query
